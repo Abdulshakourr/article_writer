@@ -1,11 +1,7 @@
 "use server";
 
 import { authClient } from "@/lib/auth-client";
-import {
-  signupFormSchema,
-  FormState,
-  signinFormSchema,
-} from "@/lib/definitions";
+import { signupFormSchema, FormState } from "@/lib/definitions";
 
 export async function signup(state: FormState, formData: FormData) {
   // Validate the form data
@@ -26,7 +22,7 @@ export async function signup(state: FormState, formData: FormData) {
 
     const { name, email, password } = validatedFields.data;
 
-    const { data, error } = await authClient.signUp.email({
+    const { error } = await authClient.signUp.email({
       name,
       email,
       password,
@@ -36,10 +32,10 @@ export async function signup(state: FormState, formData: FormData) {
     if (error) {
       return {
         errors: error.message,
-      }
+      };
     }
 
-    return { message: "success"};
+    return { message: "success" };
   } catch (error) {
     console.log("error", error);
     return { errors: error };
