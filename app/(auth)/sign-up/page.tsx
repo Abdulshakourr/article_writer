@@ -20,13 +20,17 @@ import { useFormState, useFormStatus } from "react-dom";
 
 
 type FormState = {
-  errors?:string
+  errors?: {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+  };
   message?: string;
 } | undefined;
 
 export default function SignupForm() {
   const [state, action] = useFormState<FormState, FormData>(
-    signup,
+    signup as unknown as (state: FormState, formData: FormData) => Promise<FormState>,
     undefined
   );
   const router = useRouter()
