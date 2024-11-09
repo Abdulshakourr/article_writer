@@ -16,32 +16,24 @@ import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
+import { FormState } from "@/lib/definitions";
 
 
-
-type FormState = {
-  errors?: {
-    name?: string[];
-    email?: string[];
-    password?: string[];
-  };
-  message?: string;
-} | undefined;
 
 export default function SignupForm() {
   const [state, action] = useFormState<FormState, FormData>(
-    signup as unknown as (state: FormState, formData: FormData) => Promise<FormState>,
+    signup,
     undefined
   );
   const router = useRouter()
-  if (state?.errors) {
-    console.log("Error", state?.errors);
+  // Update error handling to accommodate both string and object errors
+  if (state?.errors && typeof state.errors === 'string') {
+    console.log("Error", state.errors);
     toast({
       variant: "destructive",
-      title: state?.errors,
+      title: state.errors,
     });
   }
-
   if(state?.message === "success"){
     router.push("/sign-in")
   }
@@ -69,11 +61,11 @@ export default function SignupForm() {
               placeholder="Enter your name"
               required
             />
-            {state?.errors?.name && (
-              <p className="text-sm text-red-500 font-medium">
-                {state.errors.name}
-              </p>
-            )}
+         {state?.errors && typeof state.errors === 'object' && state.errors.name && (
+            <p className="text-sm text-red-500 font-medium">
+              {state.errors.name}
+            </p>
+          )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -85,11 +77,11 @@ export default function SignupForm() {
               placeholder="Enter your email"
               required
             />
-            {state?.errors?.email && (
-              <p className="text-sm text-red-500 font-medium">
-                {state.errors.email}
-              </p>
-            )}
+        {state?.errors && typeof state.errors === 'object' && state.errors.email && (
+            <p className="text-sm text-red-500 font-medium">
+              {state.errors.email}
+            </p>
+          )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
@@ -101,13 +93,11 @@ export default function SignupForm() {
               placeholder="Create a password"
               required
             />
-            {state?.errors?.password && (
-              <p className="text-sm text-red-500 font-medium">
-                {state.errors.password.map((error) => (
-                  <li key={error}>{error}</li>
-                ))}
-              </p>
-            )}
+         {state?.errors && typeof state.errors === 'object' && state.errors.password && (
+            <p className="text-sm text-red-500 font-medium">
+              {state.errors.password}
+            </p>
+          )}
           </div>
           <SubmitButton />
         </form>

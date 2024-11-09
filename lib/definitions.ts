@@ -40,13 +40,31 @@ export const signinFormSchema = signupFormSchema.pick({
   password: true,
 });
 
-export type FormState =
-  | {
-      errors?: {
-        name?: string[];
-        email?: string[];
-        password?: string[];
-      };
-      message?: string;
-    }
-  | undefined;
+// export type FormState =
+//   | {
+//       errors?: {
+//         name?: string[];
+//         email?: string[];
+//         password?: string[];
+//       };
+//       message?: string;
+//     }
+//   | undefined;
+  // export type FormState = {
+  //   errors?: {
+  //     name?: string[];
+  //     email?: string[];
+  //     password?: string[];
+  //   } | string;
+  //   message?: string;
+  // };
+
+  // in /lib/definitions.ts
+export type FormState = {
+  errors?: {
+    name?: string[];
+    email?: string[];
+    password?: string[];
+  } | string;
+  message?: string;
+} | undefined;

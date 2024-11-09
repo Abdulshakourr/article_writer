@@ -3,9 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { signupFormSchema, FormState } from "@/lib/definitions";
 
-export async function signup(state: FormState, formData: FormData) {
-  // Validate the form data
-  //
+export async function signup(state: FormState, formData: FormData): Promise<FormState> {
   try {
     const validatedFields = signupFormSchema.safeParse({
       name: formData.get("name"),
@@ -13,7 +11,6 @@ export async function signup(state: FormState, formData: FormData) {
       password: formData.get("password"),
     });
 
-    // If any form fields are invalid, return early
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
@@ -38,6 +35,8 @@ export async function signup(state: FormState, formData: FormData) {
     return { message: "success" };
   } catch (error) {
     console.log("error", error);
-    return { errors: error };
+    return { 
+      errors: error instanceof Error ? error.message : "An unknown error occurred" 
+    };
   }
 }
