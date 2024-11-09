@@ -23,7 +23,6 @@ export async function signup(state: FormState, formData: FormData): Promise<Form
       name,
       email,
       password,
-      callbackURL: "/",
     });
 
     console.log("data", data)
