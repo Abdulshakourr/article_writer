@@ -19,9 +19,14 @@ import { getArticles } from "@/app/actions/articles";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+interface Article {
+  id: string;
+  title: string;
+}
+
 export default function AppSidebar() {
   const pathname = usePathname();
-  const [articles, setArticles] = useState<any[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
     const fetchArticles = async () => {

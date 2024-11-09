@@ -164,9 +164,9 @@ export default function LandingPage() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      "ArticleWriter has revolutionized my writing process. It's
+                      &ldquo;ArticleWriter has revolutionized my writing process. It&apos;s
                       so easy to use and the PDF export feature is a
-                      game-changer!"
+                      game-changer!&rdquo;
                     </CardContent>
                   </Card>
                 ))}
