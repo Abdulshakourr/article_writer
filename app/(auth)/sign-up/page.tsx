@@ -29,6 +29,7 @@ export default function SignupForm() {
   // Update error handling to accommodate both string and object errors
   if (state?.errors && typeof state.errors === 'string') {
     console.log("Error", state.errors);
+    console.log("sttttt", state)
     toast({
       variant: "destructive",
       title: state.errors,

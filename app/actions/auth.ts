@@ -19,12 +19,15 @@ export async function signup(state: FormState, formData: FormData): Promise<Form
 
     const { name, email, password } = validatedFields.data;
 
-    const { error } = await authClient.signUp.email({
+    const { data,error } = await authClient.signUp.email({
       name,
       email,
       password,
       callbackURL: "/",
     });
+
+    console.log("data", data)
+    console.log("error", error)
 
     if (error) {
       return {
