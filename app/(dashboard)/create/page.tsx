@@ -51,9 +51,9 @@ const onSubmit = async(Values: z.infer<typeof formSchema>) =>{
     const data = await response.json()
     console.log("response",data)
     toast({
-      variant:"success",
-      title:data.message,
-      description:"You can now edit your article"
+      variant: "default",
+      title: data.message,
+      description: "You can now edit your article"
     })
     router.push(`/dashboard/${data.article.id}`)
   
