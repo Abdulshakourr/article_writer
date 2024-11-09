@@ -6,8 +6,6 @@ import React from "react";
 import Editor from "../../_components/editor";
 
 export default async function Markdown({ params }: { params: { id: string } }) {
-  console.log("[Params]", params);
-
   const session = await auth.api.getSession({
     headers: headers(),
   });
@@ -16,15 +14,26 @@ export default async function Markdown({ params }: { params: { id: string } }) {
     return redirect("/sign-in");
   }
 
-  const articles = await db.article.findUnique({
+  const article = await db.article.findUnique({
     where: {
       id: params.id,
       userId: session.user.id,
     },
   });
-  console.log("[Articles]", articles);
+
+  // Transform the database article to match ArticleProps
+  const formattedArticle = article
+    ? {
+        id: article.id,
+        title: article.title,
+        content: article.content ?? "", // Handle null content
+        createdAt: article.createdAt.toISOString(), // Convert Date to string
+      }
+    : null;
 
   return (
-    <div className="mt-4">{articles && <Editor article={articles} />}</div>
+    <div className="mt-4">
+      <Editor article={formattedArticle} />
+    </div>
   );
 }
