@@ -56,7 +56,7 @@ export default function AppSidebar() {
           </Link>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-md text-black/40 font-bold">
+          <SidebarGroupLabel className="text-md text-black/40 dark:text-white/40 font-bold">
             Your Articles
           </SidebarGroupLabel>
           <SidebarMenu>
