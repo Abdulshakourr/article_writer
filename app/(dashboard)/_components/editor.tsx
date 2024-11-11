@@ -6,6 +6,7 @@ import "@uiw/react-markdown-preview/markdown.css";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import html2pdf from "html2pdf.js";
 
 const Markdown = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
@@ -24,8 +25,11 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
 
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   const router = useRouter();
+
+  // Editor configuration
 
   const handleSave = async () => {
     setSaving(true);
@@ -65,6 +69,34 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
     }
   };
 
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      const element = document.querySelector(".wmde-markdown");
+      if (!element) throw new Error("No element found");
+      element.setAttribute("data-color-mode", "light");
+      // previewDiv.setAttribute("data-color-mode", "light");
+
+      console.log("export", element);
+
+      // configure html2pdf
+
+      const options = {
+        margin: 0.4,
+        filename: `${article?.title || "document"}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      };
+
+      html2pdf().set(options).from(element).save();
+    } catch (error) {
+      console.log("ERROR_EXPORT", error);
+    } finally {
+      setExporting(false);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
@@ -79,9 +111,15 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
         </div>
       </div>
 
-      <div className="mb-4 text-sm text-gray-500">
-        Last updated:{" "}
-        {new Date(article?.createdAt ?? Date.now()).toLocaleString()}
+      <div className="mb-4 text-sm text-gray-500 flex gap-x-4 items-center">
+        <div>
+          Last updated:{" "}
+          {new Date(article?.createdAt ?? Date.now()).toLocaleString()}
+        </div>
+        <Button onClick={handleExport} disabled={exporting}>
+          {" "}
+          {exporting ? "Exporting..." : "Export"}
+        </Button>
       </div>
       <div data-color-mode="light" className="markdown-editor-wrapper">
         <Markdown
@@ -89,7 +127,6 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
           value={content}
           onChange={(value) => setContent(value || "")}
           height="500px"
-          // preview="edit"
         />
       </div>
     </div>

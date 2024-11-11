@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -121,23 +117,12 @@ body {
 .markdown-editor-wrapper .wmde-markdown ol ol ol {
   list-style-type: lower-roman;
 }
-/* 
-.markdown-editor-wrapper {
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+
+.md-editor h1 a,
+.md-editor h2 a,
+.md-editor h3 a,
+.md-editor h4 a,
+.md-editor h5 a,
+.md-editor h6 a {
+  display: block !important ;
 }
-
-.markdown-editor-wrapper .wmde-markdown {
-  overflow-y: auto;
-  flex: 1;
-}
-
-.markdown-editor-wrapper .w-md-editor-preview {
-  overflow-y: auto;
-} */
-
-
-
-
