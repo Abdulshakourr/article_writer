@@ -75,21 +75,23 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
       const element = document.querySelector(".wmde-markdown");
       if (!element) throw new Error("No element found");
       element.setAttribute("data-color-mode", "light");
-      // previewDiv.setAttribute("data-color-mode", "light");
+      element.classList.add("pdf-export");
 
       console.log("export", element);
+      // Remove any unwanted elements or attributes
+      element.querySelectorAll("script, style").forEach((el) => el.remove());
 
       // configure html2pdf
-
       const options = {
-        margin: 0.4,
+        margin: [0.75, 0.75, 0.75, 0.75], // Increase margins
         filename: `${article?.title || "document"}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
+        html2canvas: { scale: 2, useCORS: true }, // Increase scale for better quality
         jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] }, // Improved page breaks
       };
 
-      html2pdf().set(options).from(element).save();
+      await html2pdf().set(options).from(element).save();
     } catch (error) {
       console.log("ERROR_EXPORT", error);
     } finally {
@@ -98,7 +100,7 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6 shadow-lg rounded-lg">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">{article?.title}</h1>
         <div className="flex gap-4">

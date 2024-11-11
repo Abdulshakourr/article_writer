@@ -126,3 +126,22 @@
 .md-editor h6 a {
   display: block !important ;
 }
+
+.pdf-export {
+  font-family: Arial, sans-serif;
+}
+
+.pdf-export h1,
+.pdf-export h2,
+.pdf-export h3,
+.pdf-export h4,
+.pdf-export h5,
+.pdf-export h6 {
+  page-break-after: avoid;
+  border-bottom: none;
+  margin-bottom: 0.5em;
+}
+
+.pdf-export p {
+  page-break-inside: avoid;
+}
