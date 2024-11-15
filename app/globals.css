@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
 
 @layer base {
   :root {
@@ -65,14 +60,6 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
 .markdown-editor-wrapper .wmde-markdown ul,
 .markdown-editor-wrapper .wmde-markdown ol {
@@ -109,13 +96,14 @@
 .md-editor h4 a,
 .md-editor h5 a,
 .md-editor h6 a {
-  display: block !important ;
+  display: block !important;
 }
 
+/* 
 .pdf-export {
   font-family: Arial, sans-serif;
-}
-
+} */
+/* 
 .pdf-export h1,
 .pdf-export h2,
 .pdf-export h3,
@@ -125,8 +113,4 @@
   page-break-after: avoid;
   border-bottom: none;
   margin-bottom: 0.5em;
-}
-
-.pdf-export p {
-  page-break-inside: avoid;
-}
+} */

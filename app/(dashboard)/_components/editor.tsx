@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import html2pdf from "html2pdf.js";
@@ -176,6 +176,7 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
   //   }
   // };
 
+
   const handleExport = async () => {
     setExporting(true);
     try {
@@ -246,6 +247,8 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
       setExporting(false);
     }
   };
+
+
 
   return (
     <div className="max-w-6xl mx-auto p-6 shadow-lg rounded-lg">

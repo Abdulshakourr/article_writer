@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import Editor from "../../_components/editor";
 
 export default async function Markdown({ params }: { params: { id: string } }) {
@@ -32,8 +32,11 @@ export default async function Markdown({ params }: { params: { id: string } }) {
     : null;
 
   return (
-    <div className="mt-4">
-      <Editor article={formattedArticle} />
+    <div className="">
+      <Suspense fallback={<div>Loading...</div>}>
+        <Editor article={formattedArticle} />
+      </Suspense>
     </div>
   );
 }
+

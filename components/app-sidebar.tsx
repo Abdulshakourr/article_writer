@@ -16,7 +16,7 @@ import {
 import UserButton from "./UserButton";
 import Link from "next/link";
 import { getArticles } from "@/app/actions/articles";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 interface Article {
