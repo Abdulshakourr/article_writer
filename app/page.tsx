@@ -100,8 +100,8 @@ export default function LandingPage() {
               <h3 className="mb-3 sm:mb-4 text-lg sm:text-xl font-semibold dark:text-white">What users say</h3>
               <blockquote className="mb-4 sm:mb-6">
                 <p className="mb-2 text-sm sm:text-base italic text-gray-700 dark:text-gray-300">
-                  "MarkFlow has completely transformed how I write documentation.
-                  The real-time preview and PDF export are game-changers!"
+                  &quot;MarkFlow has completely transformed how I write documentation.
+                  The real-time preview and PDF export are game-changers!&quot;
                 </p>
                 <footer className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                   - Sarah Chen, Technical Writer

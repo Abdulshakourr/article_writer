@@ -16,8 +16,8 @@ import {
 import UserButton from "./UserButton";
 import Link from "next/link";
 import { getArticles } from "@/app/actions/articles";
-import { Suspense, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Article {
   id: string;
@@ -71,8 +71,8 @@ export default function AppSidebar() {
                 <SidebarMenuButton
                   tooltip={item.title}
                   className={`w-full rounded-lg mb-1 ${pathname === `/dashboard/${item.id}`
-                      ? "bg-secondary text-secondary-foreground"
-                      : "hover:bg-secondary/50 text-muted-foreground hover:text-foreground"
+                    ? "bg-secondary text-secondary-foreground"
+                    : "hover:bg-secondary/50 text-muted-foreground hover:text-foreground"
                     }`}
                 >
                   <Edit className="h-4 w-4" />

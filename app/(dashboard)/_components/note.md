@@ -1,3 +1,9 @@
+
+# first Editor code
+
+
+```js
+
 "use client";
 
 import dynamic from "next/dynamic";
@@ -196,12 +202,12 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
     }
   };
 
-  // const insertMarkdown = (markdown: string) => {
-  //   const currentValue = content;
-  //   const newValue = currentValue + markdown;
-  //   setContent(newValue);
-  //   debouncedSave(newValue);
-  // };
+  const insertMarkdown = (markdown: string) => {
+    const currentValue = content;
+    const newValue = currentValue + markdown;
+    setContent(newValue);
+    debouncedSave(newValue);
+  };
 
   return (
     <div className="h-full flex flex-col w-full">
@@ -232,13 +238,15 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          <Button
-            onClick={handleExport}
-            disabled={exporting}
-            variant="outline"
-          >
-            {exporting ? "Exporting..." : "Export to PDF"}
-          </Button>
+          <Select onValueChange={(value) => value === 'pdf' && handleExport()}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Export" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="pdf">Export as PDF</SelectItem>
+              <SelectItem value="md">Export as Markdown</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </header>
 
@@ -295,3 +303,6 @@ export default function Editor({ article }: { article: ArticleProps | null }) {
     </div>
   );
 }
+
+```
+
