@@ -90,6 +90,13 @@
   list-style-type: lower-roman;
 }
 
+.wmde-markdown h2,
+h1 {
+  border-bottom: none !important;
+  margin-top: 10px !important;
+  margin-bottom: 12px !important;
+}
+
 .md-editor h1 a,
 .md-editor h2 a,
 .md-editor h3 a,

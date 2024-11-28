@@ -37,50 +37,59 @@ export default function AppSidebar() {
   }, [pathname]);
 
   return (
-    <Sidebar collapsible="icon">
-      <SidebarHeader>
+    <Sidebar>
+      <SidebarHeader className="border-b">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton className="text-xl font-bold text-indigo-600 hover:text-indigo-800">
-              <PenIcon /> Marky
+            <SidebarMenuButton className="flex items-center gap-2 py-4">
+              <PenIcon className="h-6 w-6 text-primary" />
+              <span className="text-xl font-bold bg-gradient-to-r from-primary to-indigo-600 bg-clip-text text-transparent">
+                Marky
+              </span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+
+      <SidebarContent className="px-2">
         <SidebarGroup>
-          <Link href="/create">
-            <SidebarMenuButton>
-              <Plus /> Add Article
+          <Link href="/create" className="w-full">
+            <SidebarMenuButton className="w-full bg-primary/10 hover:bg-primary/20 text-primary rounded-lg my-2">
+              <Plus className="h-4 w-4" />
+              <span className="font-medium">New Article</span>
             </SidebarMenuButton>
           </Link>
         </SidebarGroup>
+
         <SidebarGroup>
-          <SidebarGroupLabel className="text-md text-black/40 dark:text-white/40 font-bold">
+          <SidebarGroupLabel className="px-2 text-sm font-semibold text-muted-foreground">
             Your Articles
           </SidebarGroupLabel>
           <SidebarMenu>
-            {/* {articles && <p>loading...</p>} */}
             {articles.map((item) => (
-              <Link href={`/dashboard/${item.id}`} key={item.id}>
+              <Link href={`/dashboard/${item.id}`} key={item.id} className="w-full">
                 <SidebarMenuButton
                   tooltip={item.title}
-                  className="text-sm text-gray-500 hover:text-gray-800"
+                  className={`w-full rounded-lg mb-1 ${pathname === `/dashboard/${item.id}`
+                      ? "bg-secondary text-secondary-foreground"
+                      : "hover:bg-secondary/50 text-muted-foreground hover:text-foreground"
+                    }`}
                 >
-                  <Edit />
-                  {item.title}
+                  <Edit className="h-4 w-4" />
+                  <span className="truncate text-sm">{item.title}</span>
                 </SidebarMenuButton>
               </Link>
             ))}
             {!articles.length && (
-              <SidebarMenuButton className="text-sm text-gray-500 hover:text-gray-800">
-                No articles found
-              </SidebarMenuButton>
+              <div className="px-2 py-4 text-sm text-muted-foreground text-center">
+                No articles yet
+              </div>
             )}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+
+      <SidebarFooter className="border-t p-2">
         <SidebarMenu>
           <SidebarMenuItem>
             <UserButton />
